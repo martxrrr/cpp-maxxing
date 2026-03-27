@@ -53,10 +53,10 @@ int main(){
     newPtr = new int(20); //allocated another memory, with the same ptr name while still having another memory
     delete newPtr; //freeing one of the memory while leaving the other one hanging and no way to access it
 
-    //memory allocation and classes
+    //dynamic memory allocation and classes
     Car *car1 = new Car("Volkswagen");
     car1->print();
-    
+
     (*car1).name = "Mercedes Benz";
     (*car1).print();
     
