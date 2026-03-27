@@ -1,1 +1,3 @@
-i'll update the readme after 100 days and make the repo public 
+tackling one concept at a time
+100 days of c++ consistecy
+a project or mini-project every 5th day
