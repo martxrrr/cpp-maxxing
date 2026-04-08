@@ -38,7 +38,7 @@ int main(){
     std::cout << myString2.at(1) << std::endl;
 
     //special characters
-    string text2 = "The greatest footballer of all time "Lionel Messi" Retires at 40!"; //an error occurs while using multiple double quotes in the same string
+    // string text2 = "The greatest footballer of all time "Lionel Messi" Retires at 40!"; //an error occurs while using multiple double quotes in the same string
     string text2 = "The greatest footballer of all time \"Lionel Messi\" Retires at 40!"; //inserting double quotes
     string text3 = "He is the most successful Ballon d'or winner \'8 ballon d'ors\'"; //inserting single quotes
     string text4 = "This is a \nnew line and a \t tab"; //new line and a tab
