@@ -1,0 +1,51 @@
+[
+    {
+        "ID": 1032,
+        "author": "J.K Rowling",
+        "releaseYear": 1987,
+        "title": "Hobbit",
+        "borrowed": false
+    },
+    {
+        "ID": 1033,
+        "author": "J.R.R Jenkins",
+        "releaseYear": 1990,
+        "title": "Harry Porter",
+        "borrowed": false
+    },
+    {
+        "ID": 1034,
+        "author": "Ken Walibora",
+        "releaseYear": 2011,
+        "title": "Siku Njema",
+        "borrowed": false
+    },
+    {
+        "ID": 1035,
+        "author": "Said A. Mohamed",
+        "releaseYear": 1985,
+        "title": "Kiu",
+        "borrowed": false
+    },
+    {
+        "ID": 1036,
+        "author": "Wallah bin Wallah",
+        "releaseYear": 1997,
+        "title": "Hekaya za Abunwasi",
+        "borrowed": false
+    },
+    {
+        "ID": 1037,
+        "author": "Jason Njoroge",
+        "releaseYear": 2013,
+        "title": "Thorns of a Dead Rose",
+        "borrowed": false
+    },
+    {
+        "ID": 1045,
+        "author": "Ngugi Wathiong'o",
+        "releaseYear": 2010,
+        "title": "The River Between",
+        "borrowed": false
+    }
+]

@@ -1,0 +1,23 @@
+[
+    {
+        "libraryStatus": {
+            "booksOwing": 1042
+        },
+        "name": "Martin Waiaina",
+        "schoolID": 24001
+    },
+    {
+        "libraryStatus": {
+            "booksOwing": 1032
+        },
+        "name": "Jeffrey Dahmer",
+        "schoolID": 22990
+    },
+    {
+        "libraryStatus": {
+            "booksOwing": 1032
+        },
+        "name": "Nigga Kang'ethe",
+        "schoolID": 12367
+    }
+]
