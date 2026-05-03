@@ -1,8 +1,16 @@
 #include <iostream>
 
+class Person{
+    std::string name;
+    int age;
+    public:
+    Person(): name(name), age(age) {}
+};
+
+
 int main(){
 
-
+    std::cout << "Hello World" << std::endl;
 
     return 0;
 }
