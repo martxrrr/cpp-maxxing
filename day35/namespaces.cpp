@@ -1,3 +1,15 @@
+/*
+A namepsace provides scope that allows you to declare or define names inside of it for the
+purpose of disambiguation.
+A name declared within a scope region is different from any identical name declared in another scope
+Namespaces may only contain declaratoions and definitions, executable statements are only allowed if they are part of a definition
+Global namespace
+In C++, any name that is not defined inside a class, function, or a namespace is considered to be part of an implicitly-defined namespace called the global namespace 
+
+*/
+
+
+
 #include <iostream>
 
 void printInfo(char* name){
