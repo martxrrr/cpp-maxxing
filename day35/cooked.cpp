@@ -1,7 +1,6 @@
 #include <iostream>
 
-int main(){
-
+void cooked(){
 	std::string text = "I am so cooked";
 	std::string text2 = "I've got a Calculus exam tomorrow and I have got no hope mate";
 	std::string text3 = "Fuck exam pressure!";
@@ -17,7 +16,11 @@ int main(){
 	I have never felt much relieve man. At least now I have a chance to recover and study for the final exam and aim for that A 
 	haha, I love you Calculus lecturer.
 	)";
+}
 
+int main(){
+
+	cooked();
 
 	return 0;
 }
