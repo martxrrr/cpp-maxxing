@@ -23,6 +23,7 @@ class Animal{
     }
 };
 
+
 class Dog : public Animal{
     std::string language;
     std::string vision;
