@@ -67,6 +67,8 @@ int main(){
 	std::cout << text << "\n";
 	std::cout << typeid(text).name() << "\n";
 
+	auto ans = to_int()
+
 
 
 	return 0;

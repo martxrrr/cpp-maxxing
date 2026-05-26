@@ -31,26 +31,26 @@ void swapByReference(int &refA, int &refB){ //saves computaional power, can modi
 
 int main(){
 
-	// std::cout << "Int: " << sizeof(int) << std::endl; //4 bytes
-	// std::cout << "bool: " << sizeof(bool) << std::endl; //1 byte
-	// std::cout << "Size_t: " << sizeof(size_t) << std::endl; //8 bytes
-	// std::cout << "Double: " << sizeof(double) << std::endl; //8 bytes
-	// std::cout << "Float: " << sizeof(float) << std::endl; //4 bytes
-	// std::cout << "long long: " << sizeof(long long) << std::endl; //8 bytes
-	// std::cout << "Long Int: " << sizeof(long int) << std::endl; //8 bytes
+	std::cout << "Int: " << sizeof(int) << std::endl; //4 bytes
+	std::cout << "bool: " << sizeof(bool) << std::endl; //1 byte
+	std::cout << "Size_t: " << sizeof(size_t) << std::endl; //8 bytes
+	std::cout << "Double: " << sizeof(double) << std::endl; //8 bytes
+	std::cout << "Float: " << sizeof(float) << std::endl; //4 bytes
+	std::cout << "long long: " << sizeof(long long) << std::endl; //8 bytes
+	std::cout << "Long Int: " << sizeof(long int) << std::endl; //8 bytes
 
-	// //different sizes of integers
-	// std::cout << sizeof(int8_t) << std::endl; //  8-bit system (1)
-	// std::cout << sizeof(int16_t) << std::endl; // 16-bit (2)
-	// std::cout << sizeof(int32_t) << std::endl; // 32-bit (4)
-	// std::cout << sizeof(int64_t) << std::endl; // 64-bit (8)
+	//different sizes of integers
+	std::cout << sizeof(int8_t) << std::endl; //  8-bit system (1)
+	std::cout << sizeof(int16_t) << std::endl; // 16-bit (2)
+	std::cout << sizeof(int32_t) << std::endl; // 32-bit (4)
+	std::cout << sizeof(int64_t) << std::endl; // 64-bit (8)
 
 
-	// int age = 4294967295; 
-	// std::cout << age << std::endl;
+	int age = 4294967295; 
+	std::cout << age << std::endl;
 
-	// auto pi = 3.141592653f;
-	// std::cout << typeid(pi).name() << std::endl;
+	auto pi = 3.141592653f;
+	std::cout << typeid(pi).name() << std::endl;
 
 	// double pi2 = 3.141592653;
 	// std::cout << typeid(pi2).name() << "\n";
