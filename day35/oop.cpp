@@ -107,6 +107,7 @@ Constructor - a special member function that initializes the data members of the
 Types of constructors:
     1. Default contructor - takes no parameters
     2. Parametized constructors - takes params when declared and arguments when an object is being created
+    3. Copy Constructors - takes another object as a constructor
     
 
 */
