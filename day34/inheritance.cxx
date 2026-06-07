@@ -104,26 +104,26 @@ int main(){
     Fox muthige;
     Jackal hunter;
 
-    // dracula.Limbs();
-    // dracula.Skin();
-    // dracula.Talk();
-    // dracula.Vision();
+    dracula.Limbs();
+    dracula.Skin();
+    dracula.Talk();
+    dracula.Vision();
 
-    // std::cout << std::endl;
+    std::cout << std::endl;
 
-    // kitty.Limbs();
-    // kitty.Skin();
-    // kitty.Talk();
-    // kitty.Vision();
+    kitty.Limbs();
+    kitty.Skin();
+    kitty.Talk();
+    kitty.Vision();
 
-    // std::cout << std::endl;
+    std::cout << std::endl;
 
-    // scooby.Limbs();
-    // scooby.Skin();
-    // scooby.Talk();
-    // scooby.See();
+    scooby.Limbs();
+    scooby.Skin();
+    scooby.Talk();
+    scooby.See();
 
-    // muthige.printInfo();
+    muthige.printInfo();
     muthige.extra();
 
     hunter.printInfo();
