@@ -14,6 +14,22 @@ class Complex{
     }
 };
 
+class Number{
+
+    int value;
+public:
+    Number(int v){
+        value = v;
+    }
+
+    void show(){
+        std::cout << "Value: " << value << "\n";
+    }
+    void operator++(){
+        value++;
+    }
+};
+
 int main(){
     Complex c1(2, 3);
     Complex c2(3, 4);
@@ -22,6 +38,15 @@ int main(){
     c3.display();
 
     std::cout << "Hello World" << std::endl;
+
+    Number a(5);
+
+    std::cout << "Before increment: " << "\n";
+    a.show();
+
+    std::cout << "After increment: " << "\n";
+    a++;
+    a.show();
 
     return 0;
 }
@@ -38,7 +63,19 @@ e.g & - ampersand
     -
     and many more
 
+rules:
+    1. You can only overload existing operators
+    2. Operator precedence can not change
+    3. Number of operands remain the same, unary and binary
+advs:
+    1. improves code readability
+    2. makes code intuitive
+    3. makes classes behave like built in types
+    4. simplifies complex expression
 
+unary:
+    1. works on one operand like ++a, a++, --a, a--
+    2. 
 
 
 
