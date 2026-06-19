@@ -33,7 +33,7 @@ int main(){
 	}
 
 	// std::cout << std::endl;
-	// std::cout << voltage << "\n";	
+	// std::cout << voltage << "\n";
 	int count { 0 };
 	int limit { 3 };
 	do{
