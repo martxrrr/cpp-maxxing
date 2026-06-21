@@ -74,6 +74,7 @@ int main(){
 	}
 	std::cout << std::endl;
 
+
 	Codes code = server;
 	int anotherCode = code;
 	std::cout << code << "\n";

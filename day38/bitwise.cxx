@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <bitset>
 
+
 using namespace std;
 int main(){
 
