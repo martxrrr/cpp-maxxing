@@ -26,7 +26,8 @@ int main(){
         If a file exists, std::ofstream ERASES it and overwrites it
         If the file doesn't exist, it is created
         */
-        const std::string filename = "/home/martxrrr/Programming/MAIN/C++/100daysOfCpp/day40/testFile.txt";
+       
+        const std::string filename = "-testFile.txt";
         {
                 std::ofstream file(filename);
                 if(!file.is_open()){
@@ -38,6 +39,7 @@ int main(){
                 file << "Maintain a very high transcript, and apply for masters\n";
                 file << "Masters receive better financial aid from sponsors and you can also work \n since you have already finished your degree\n";
         }
+
         /*
         std::ifstream for READING FROM A FILE
         std::getline reads characters until it reaches the new line character '\n',
@@ -48,7 +50,7 @@ int main(){
         which is almost not what I want
         */
 
-        std::string anotherFile = "/home/martxrrr/Programming/MAIN/C++/100daysOfCpp/day40/csvFile.csv";
+        std::string anotherFile = "-csvFile.csv";
 
         {
                 std::ifstream file(anotherFile);
@@ -58,13 +60,44 @@ int main(){
                 }
 
                 std::string line;
-                int lineCount;
+                int lineCount = 1;
                 while(std::getline(file, line)){
                         std::cout << line << "\n";
                         lineCount++;
                 }
                 std::cout << "The file has " << (lineCount - 1) << "lines\n";
         }
+
+        /*
+        MODES:
+                std::ios::out - the default for std::ofstream
+                std::ios::app - used with std::ofstream to append to the end of file
+                std::ios::ate 
+                std::ios::in - used with std::ifstream, it is the default for reading a file
+                std::ios::binary - binary mode
+        */
+
+        std::string name_of_file = "csvFile.csv";
+        {
+                std::ofstream playersFile(name_of_file, std::ios::app);
+                std::string morePlayers = "dewey,17,white";
+                playersFile << "\n" << morePlayers ;
+        }
+
+        /*
+        FILE STATUS CHECKS
+        */
+       const std::string playerFile = "csvFile.csv";
+       {
+                std::ofstream openFile(playerFile, std::ios::out);
+                std::cout << "File is_open()" << openFile.is_open() << "\n"; //returns true if a file is open
+                std::cout << "File good()" << openFile.good() << "\n"; //returns true if a file is good
+                std::cout << "File bad()" << openFile.bad() << "\n"; //returns true if an irrecovarable I/O occured
+
+                //others
+                //eof(); //checks the end of file
+
+       }
 
 
 
