@@ -96,6 +96,7 @@ int main(){
 
                 //others
                 //eof(); //checks the end of file
+                //fail(); // true if a logica error occured
 
        }
 
