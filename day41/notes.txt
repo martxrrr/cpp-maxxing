@@ -1,0 +1,36 @@
+/*
+Namespaces
+
+Namespaces prevent naming collisions - a variable declared inside a scope (defined by { }), is invisible outside the scope
+In large codebases, this is very important as it prevents pollution and naming collisions
+
+Global scope variables:
+        Declared outside all functions
+        Initialized to Zero and not garbage values
+        They live out throughout the program, they are not detroyed even when they are unused
+
+Within a translation unit, objects are initialized in the order in which they are defined, if A is defined before B then
+A will be initialized before B
+
+Across Translation Units (different .cpp files of the same program) - The initialization order is unspecified
+If value A is in file1.cpp and variable B is in file2.cpp, variable B may be initialized before variable A by the compiler depending on the link order
+This uncertainty leades to the Static Order Initialization Fiasco, where one global depends on another global from another file
+
+Namespaces - group related code together under a unique name to prevent naming collisions
+
+Static local variable:
+        a function-local static variable has these properties:
+                1. It is only visible to the function only, i,e LOCAL variable for the function
+                2. It has static lifetime, that is, it lives throughout the program's memory
+
+
+more about the static keyword:
+        It has different meanings depending on the context (classic c++ feature)
+        1. When applied to a global variable or a function, outside a class, it resticts its visibility to the 
+           current translatio unit
+        2. When used inside a function to declare a local variable, it declare a local variable with a static storage duration
+           i.e it is initialized only once and retains it's value between function calls
+        3. When applied to a class member, it indicates that the member belongs to the class itself rather than any 
+           specific instance meaning it can be shared among all the instances of the class and can be accessed without instantiating the class
+
+*/
