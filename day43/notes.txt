@@ -1,0 +1,53 @@
+The C++ Preprocessor
+
+Before compilation, each C++ goes thru preprocessing 
+In this phase, a program called the preprocessor makes various changes to the text of the code file. 
+The preprocessor does not actually modify the original code files in any way -- rather, all changes made by the preprocessor happen either temporarily in-memory or using temporary files.
+
+Preprocessor directives (often just called directives) are instructions that start with a # symbol and end with a newline (NOT a semicolon).
+These directives tell the preprocessor to perform certain text manipulation tasks. Note that the preprocessor does not understand C++ syntax -- instead, 
+the directives have their own syntax (which in some cases resembles C++ syntax, and in other cases, not so much).
+
+The #include directive:
+  When you #include a file, the preprocessor replaces the #include directive with the contents of the included file. 
+  The included contents are then preprocessed (which may result in additional #includes being preprocessed recursively), then the rest of the file is preprocessed.
+
+Macro defines:
+a macro is a rule that defines how input text is converted into replacement output text
+
+There are two basic types of macros: object-like macros, and function-like macros.
+
+1. Function-like macros act like functions, and serve a similar purpose. Their use is generally considered unsafe, and almost anything they can do can be done by a normal function.
+
+2. Object-like macros can be defined in one of two ways:
+
+    #define IDENTIFIER
+    #define IDENTIFIER substitution_text
+The top definition has no substitution text, whereas the bottom one does. Because these are preprocessor directives (not statements), note that neither form ends with asemicolon.
+
+Avoid macros with substitution text unless no viable alternatives exist, because C++ offers much better options and this methos is mostly found in legacy code
+
+Object-like Macros are also used in Conditional compilation
+The conditional compilation preprocessor directives allow you to specify under what conditions something will or won’t compile
+Conditional compilation directives include :
+      #ifdef - The #ifdef preprocessor directive allows the preprocessor to check whether an identifier has been previously defined 
+               via #defineThe #ifdef preprocessor directive allows the preprocessor to check whether an identifier has been previously defined via #define
+               If so, the code between the #ifdef and matching #endif is compiled. If not, the code is ignored
+      #ifndef - stands for "if not defined" 
+      #endif - indicate the end of the "ifdef", "if", "elif" and "ifndef" blocks
+
+Macro substitution does not occur when a macro identifier is used within another preprocessor command.
+
+The scope of #define directives
+The C++ preprocessor does not understand C++ syntax like scope, classes or function, so even if
+you define a #define directive inside a function or a class and not call the function nor instantiate the
+class, the #define directive will be processed by the preprocessor, But to avoid confusion, always
+define your #define directives at the top because it will make no fucking difference
+
+Because an #include directive replaces the #include directive with the content of the included file,
+an #include can copy directives from the included file into the current file. These directives will then be processed in order
+
+Once the preprocessor has finished, all defined identifiers from that file are discarded. This means that directives are only valid
+from the point of definition to the end of the file in which they are defined.
+Directives defined in one file do not have any impact on other files (unless they are #included into another file).
+

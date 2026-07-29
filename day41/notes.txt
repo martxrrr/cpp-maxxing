@@ -33,4 +33,27 @@ more about the static keyword:
         3. When applied to a class member, it indicates that the member belongs to the class itself rather than any 
            specific instance meaning it can be shared among all the instances of the class and can be accessed without instantiating the class
 
+
+
+Recursion - this is when a function calls itself
+A recursive function must have :
+        1. A base case - a condition which when met, the recursion stops
+          Without a proper base case, the recursion might take place forever
+        2. A recursive case - a call that makes the problem smaller
+           it moves towards the base case
+
+Each call pushes a new stack frame containing variables, parameters and return addresses
+When the base case returns, frames are popped one by one (unwinding)
+
+Some problems are better solved iteratively than recursively, and others vice versa
+beware of infinite looping or very deeply recursive algorithms, it can lead to stack overflow
+Some recursive implementations have ridiculous time complexities
+The solutions include :
+        1. Memoization
+        2. Iterative solutions
+        3. Dynamic programming - bottom-up table filling
+
+Recursion is very useful in implementing graphs, trees and algorithms such as the minimax algorithm
+
+
 */
