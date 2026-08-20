@@ -102,14 +102,14 @@ public:
 //a class demostrating rule of 3
 class StringBox{
   private:
-      size_t size;
+      size_t length;
       char *data;
   public:
       StringBox(const char* text){
           length = std::strlen(text);
 
           data = new char[length + 1];
-          std::strcpy(data, length);
+          std::strcpy(data, text);
       }
 
       //RULE OF 3 BEGINS
@@ -184,41 +184,3 @@ int main(){
 
     return 0;
 }
-
-
-
-/*
-
-NOTES:
-
-'virtual' tells the compiler to do late binding or runtime polymorphism
-
-'override' ensures we are truly overriding a base virtual method
-It tells the compiler: "I intend to override a virtual function in the base class. If I'm wrong (e.g., wrong signature), give me a compile error."
-
-
-A pure virtual method in C++ is a virtual function declared in a base class with = 0 and no implementation, forcing all non-abstract derived classes to provide their own definition
-
-/*
-Rule Of Three Five 
-This rule applies when a class explicitly manages dynamic resources (raw pointers)
-RULE OF 3
-"If a class needs a user-defined Destructor (i.e. manual `delete`), then you MUST also define these two
-yourself:"
-1. Destructor
-2. Copy Constructor
-3. Copy Assignment Operator
-
-
-Shallow Copying
-Copies pointer addresses; both objects point to the same memory
-High Risk: leads to double-free errors or unintended side effects when one object mutates the shared data.
-Fast performance(fixed-time memory copy).
-
-
-Deep Copying
-Duplicates the target data; each object gets a unique pointer.
-Safe: modifying or destroying one object does not impact the other.
-Slower (requires allocating heap memory and copying data array/buffer).
-
-*/
