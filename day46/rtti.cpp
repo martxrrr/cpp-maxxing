@@ -12,15 +12,16 @@ class Sensor{
     virtual double read() const = 0;
 };
 
+
 class TemperatureSensor: public Sensor {
-    double celcius_;
+    double celsius_;
 
     public:
-    explicit TemperatureSensor(double c) : celcius_(c) {}
+    explicit TemperatureSensor(double c) : celsius_(c) {}
 
     std::string getType() const override { return "TemperatureSensor"; }
 
-    double read() const override { return celcius_; }
+    double read() const override { return celsius_; }
 
     double toFahrenheit() const { return celsius_ * 9.0 / 5.0 + 32.0; }
 };
@@ -29,7 +30,7 @@ class OxygenSensor : public Sensor {
     double voltage_;
 
     public:
-    explicit OxygenSensor(double v) : volatge_(v) {}
+    explicit OxygenSensor(double v) : voltage_(v) {}
 
     std::string getType() const override { return "OxygenSensor"; }
 
@@ -45,18 +46,18 @@ struct DTCode{
 };
 
 void identifySensor(const Sensor& s){
-    std:cout << "Typeid name : " << typeid(s).name() << "\n";
-    std:cout << "Hash code   : " << typeid(s).hash_code() << "\n";
-    std:cout << "getType()" << s.getType() << "\n";
+    std::cout << "Typeid name : " << typeid(s).name() << "\n";
+    std::cout << "Hash code   : " << typeid(s).hash_code() << "\n";
+    std::cout << "getType()" << s.getType() << "\n";
 }
 
 
 void processSpecificSensor(Sensor* s){
     if (auto* temp = dynamic_cast<TemperatureSensor*>(s)){
-        std::cout << "[TemperatureSensor] " << temp->read() << " C " << temp->toFahrenheit() << " F\n";
-    }else if(auto oxy* = dynamic_cast<OxygenSensor*>(s)){
+        std::cout << "[TemperatureSensor] " << temp->read() << " Celsius -> " << temp->toFahrenheit() << " Fahrenheit\n";
+    }else if(auto* oxy = dynamic_cast<OxygenSensor*>(s)){
         std::cout << "[OxygenSensor] " << oxy->read() << "V\n";
-        std::cout << (oxy->isLean() ? "Lean" : "Rich") << "mixture\n";
+        std::cout << (oxy->isLean() ? "Lean" : "Rich") << " mixture\n";
     }
     else {
         std::cout << " [Unknown sensor type]\n";
@@ -80,10 +81,59 @@ int main(){
 
     for(const auto& s : sensors){
         std::cout << "Sensor : " << s->getType() << "\n";
-        std::cout << identifySensor(*s);
+        identifySensor(*s);
         std::cout << "\n";
     }
 
+    TemperatureSensor coolantTemp(88.0);
+    TemperatureSensor intakeTemp(35.0);
+    OxygenSensor boostOxygen(150.0);
+
+    std::cout << "Demonstrate Type Comparison\n";
+
+    demonstrateTypeComparison(coolantTemp, coolantTemp);
+    demonstrateTypeComparison(intakeTemp, boostOxygen);
+
+    //dynamic_cast - safe downcast
+    std::cout << std::endl;
+    std::cout << "Dynamic Casting\n";
+    Sensor* engineTemp = &coolantTemp;
+    processSpecificSensor(engineTemp);
+
+    Sensor* manifold = &boostOxygen;
+    processSpecificSensor(manifold);
+    std::cout << std::endl;
+
+    //dynamic_cast failure
+    Sensor* sensorPtr = &boostOxygen;
+    auto* asTemp = dynamic_cast<TemperatureSensor*> (sensorPtr);
+    if (asTemp == nullptr){
+        std::cout << "[DYNAMIC-CASTING FAILED] ...\n";
+        std::cout << "Safe exit!\n";
+    }
+
+    //failing using reference -> it throws std::bad_cast upon failure
+    try{
+        [[maybe_unused]] auto& oxy = dynamic_cast<OxygenSensor&>(*sensorPtr);
+    }catch(const std::bad_cast& e){
+        std::cout << "dynamic_cast<OxygenSensor&>(*sensorPtr) threw " << e.what() << "\n";
+    }
+
+
+    //polymorphic 
+    std::cout << std::endl;
+    std::cout << "Polymorphic\n";
+    Sensor* basePtr = &coolantTemp;
+    std::cout << "Declared Type : Sensor* \n";
+    std::cout << "Runtime Type "<< typeid(*basePtr).name() << "\n";
+
+    //non-polymorphic
+    std::cout << std::endl;
+    std::cout << "Non-polymorphic\n";
+    DTCode dtc(420, "Catalyst Below Threshhold");
+    const DTCode& dtcref = dtc;
+    std::cout << "Declared Type : DTCode\n";
+    std::cout << "After typeid(dtcref).name() " << typeid(dtcref).name() << "\n";
 
 
     return 0;
