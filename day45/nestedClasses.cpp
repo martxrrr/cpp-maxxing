@@ -15,11 +15,13 @@ class CanMessage{
         Header(uint32_t id, uint8_t dlc, bool is_extended, bool is_rtr)
             : arb_id_(id), dlc_(dlc), extended_frame_(is_extended), rtr_(is_rtr) {}
         
+        //getters    
         uint32_t getArbId() const { return arb_id_;         }
         uint8_t getDlc()    const { return dlc_;            }
         bool isExtended()   const { return extended_frame_; }
         bool isRtr()        const { return rtr_;            }
 
+        //setters
         void setArbId(uint32_t id)  { srb_id_ = id;                }
         void setDlc(uint8_t dlc)    { dlc_ = (dlc <= 8) ? dlc : 8; }
         void setExtended(bool ext)  { extended_frame_ = ext;       }
@@ -83,6 +85,74 @@ class CanMessage{
     Payload payload_;
 
 };
+
+
+/*
+PImpl
+* The PImpl idiom (Pointer to Implementation)—sometimes spelled PIMP
+   is a C++ structural design pattern that isolates a class's interface from its implementation details.
+* It relies on a forward-declared internal class and an opaque pointer (std::unique_ptr) to store 
+   all private data members and non-virtual private functions.  
+*/
+
+
+
+class Widget{
+    public:
+        Widget(const std::string& name);
+        ~Widget();
+
+        //move operations
+        Widget(Widget&&) noexcept;
+        Widget& operator=(Widget&&) noexcept; //returns an rvalue, and also takes an rvalue reference
+
+        Widget(const Widget& other);
+        Widget& operator=(const Widget& other);
+
+    void doSomething();
+
+    private:
+        struct Impl;
+        std::unique_ptr<Impl> PImpl;
+};
+
+struct Widget::Impl{
+    std::string name;
+    std::vector<int> internalData;
+
+    void heavyComputation(){
+        std::cout << "Heavy Processing " << name << "with size " << internalData.size() << " elements\n";
+    }
+};
+
+Widget::Widget(const std::string& name){
+    : PImpl(std::make_unique<Impl>()){
+        PImpl->name = name;
+        PImpl->internalData = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    }
+}
+
+Widget::~Widget() = default;
+
+
+Widget::Widget(Widget&&) noexcept = default;
+Widget& Widget::operator=(Widget&&) noexcept = default;
+
+
+Widget::Widget(const Widget7 other){
+    : PImpl(std::make_unique<Impl>(*other.PImpl)) {}
+}
+
+Widget& Widget::operator=(const Widget& other){
+    if(this != &other){
+        *PImpl = *other.PImpl;
+    }
+    return *this;
+}
+
+void Widget::doSomething(){
+    PImpl->heavyComputation();
+}
 
 int main(){
 
