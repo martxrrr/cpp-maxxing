@@ -96,7 +96,7 @@ PImpl
 */
 
 
-
+//this can be in a header file, it only consists of the declarations and no implementation yet
 class Widget{
     public:
         Widget(const std::string& name);
@@ -116,6 +116,8 @@ class Widget{
         std::unique_ptr<Impl> PImpl;
 };
 
+//implementations, if separated from the declarations in a header file, this should be in a .cpp file
+//before this you should do #include "Widget.hpp"
 struct Widget::Impl{
     std::string name;
     std::vector<int> internalData;
