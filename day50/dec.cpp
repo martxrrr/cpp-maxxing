@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <cstdlib>
 
 #include <cryptopp/sha.h>
 #include <cryptopp/files.h>
@@ -13,25 +14,23 @@
 namespace fs = std::filesystem;
 
 void deriveKey(const std::string& password, CryptoPP::SecByteBlock& key);
-
 bool processFile(const std::string& inputFile, 
                  const std::string& outputFile, 
                  const std::string& password, 
-                 bool encrypt);
-
+                 bool encrypt);    
+    
 int main(int argc, char* argv[]){
 
     const std::string myPassword = "musiala24001";
-
-    std::string dir        {};
-    std::string password   {};
-    std::string currentArg {};
+    std::string password {};
+    std::string fileName {};
+    std::string currentArg;
 
     if(argc > 4 || argc < 4){
         std::cerr << "Invalid number of arguments!\n";
         return -1;
     }else{
-        dir = argv[1];
+        fileName = argv[1];
         for(int i = 0; i < argc; i++){
             currentArg = argv[i];
             if(currentArg == "password"){
@@ -39,48 +38,50 @@ int main(int argc, char* argv[]){
             }
         }
     }
-
-    if(password == myPassword){
-        fs::path targetDir(dir);
-        fs::path encDir = "encDir";
-        fs::path fullDir = targetDir / encDir;
-
-        if(!fs::exists(fullDir)){
-            fs::create_directories(fullDir);
-        }
+    
+    if (myPassword == password){
+        fs::path file = fileName;
 
         try{
-            for(const auto& entry : fs::recursive_directory_iterator(targetDir)){
-                if(entry.is_regular_file()){
+            if(fs::exists(file)){
+                std::string encryptedFile = file;
+                std::string ext = file.extension().string();
+                std::string decryptedFile = "decrypted" + ext;
 
-                    fs::path fullPath = fullDir / entry.path().filename();
-
-                    std::string secretFile = entry.path();
-                    std::string encryptedFile = fullPath;
-
-                    if(processFile(secretFile, encryptedFile, myPassword, true)){
-                        std::cout << "[ENCRYPTING ...] " << fullPath.filename() << std::endl;
-                    }
-
+                std::cout << "\n[DECRYPTING WITH CRYPTO++] decrypting file ...\n";
+                if(processFile(encryptedFile, decryptedFile, myPassword, false)){
+                    std::cout << "Successfully decrypted " << decryptedFile << std::endl;
+                    
                     try{
-                        fs::remove(secretFile);
-                    }catch(const fs::filesystem_error& e){
-                        std::cerr << "[ERROR] \n" << e.what();
+                        std::string command = "xdg-open " + decryptedFile;
+                        std::system(command.c_str());
+                    }catch(const std::exception& e){
+                        std::cerr << "Failed to open file!\n";
+                        std::cerr << "Check file format and try again\n";
+                        std::cerr << e.what();
                     }
-
-                    fs::rename(encryptedFile, secretFile);
+                    
+                    try{
+                        if(fs::remove(decryptedFile)){
+                            std::cout << "Decrypted file deleted successfully!\n";
+                        }else{
+                            std::cout << "File not found!\n";
+                        }
+                    }catch(const fs::filesystem_error& e){
+                        std::cerr << "[ERROR] ... \n" << e.what();
+                    }
                 }
+            }else{
+                std::cerr << "File does not exist!\n";
             }
-            fs::remove(fullDir);
-        }
-        catch(const fs::filesystem_error& e){
-            std::cerr << e.what() << std::endl;
+        }catch(const fs::filesystem_error& e){
+                        std::cerr << "[ERROR] ... \n" << e.what();
         }
     }else{
         std::cerr << "Wrong password!\n";
         return -1;
     }
-    
+
     return 0;
 }
 
@@ -91,18 +92,22 @@ void deriveKey(const std::string& password, CryptoPP::SecByteBlock& key)
     hash.Final(key);
 }
 
+
 bool processFile(const std::string& inputFile, 
                  const std::string& outputFile, 
                  const std::string& password, 
                  bool encrypt){
+                    
     try{
         CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH);
         deriveKey(password, key);
         CryptoPP::byte iv[CryptoPP::AES::BLOCKSIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
+
         if(encrypt){
             CryptoPP::CBC_Mode<CryptoPP::AES>::Encryption enc;
             enc.SetKeyWithIV(key, key.size(), iv);
+
 
             CryptoPP::FileSource(inputFile.c_str(), true,
                 new CryptoPP::StreamTransformationFilter(enc,
