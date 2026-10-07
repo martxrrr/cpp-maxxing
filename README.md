@@ -26,3 +26,5 @@ Here are some of the few things I worked on:
 	A tool that takes in a directory and a password to loop through the directory recursively and encrypts every file
 	and replaces them with a decrypted version. It also decrypts a file with the help of a password.
 	The tool uses **Crypto++** library (SHA256 for hashing of password and AES for encryption)
+
+Tested and Developed on Arch Linux
